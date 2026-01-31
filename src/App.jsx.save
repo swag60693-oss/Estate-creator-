@@ -1,0 +1,62 @@
+import { useEffect, useState } from "react";
+
+export default function App() {
+  const [role, setRole] = useState(null);
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      console.log("Location:", pos.coords.latitude, pos.coords.longitude);
+    });
+  }, []);
+
+  function addProperty(e) {
+    e.preventDefault();
+    const form = e.target;
+    const property = {
+      title: form.title.value,
+      price: form.price.value,
+      location: form.location.value,
+    };
+    setProperties([...properties, property]);
+    form.reset();
+  }
+
+  if (!role) {
+    return (
+      <div style={{ padding: 20 }}>
+        <h1>Estate-Connect</h1>
+        <p>Select your role:</p>
+        <button onClick={() => setRole("landlord")}>Landlord</button>
+        <button onClick={() => setRole("tenant")}>Tenant</button>
+        <button onClick={() => setRole("agent")}>Agent</button>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Estate-Connect ({role})</h1>
+
+      {role !== "tenant" && (
+        <form onSubmit={addProperty}>
+          <h3>Add Property</h3>
+          <input name="title" placeholder="House title" required />
+          <input name="price" placeholder="Price" required />
+          <input name="location" placeholder="Location" required />
+          <button>Add</button>
+        </form>
+      )}
+
+      <h3>Available Properties</h3>
+      {properties.map((p, i) => (
+        <div key={i} style={{ border: "1px solid #ccc", margin: 8, padding: 8 }}>
+          <b>{p.title}</b>
+          <div>Price: {p.price}</div>
+          <div>Location: {p.location}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+

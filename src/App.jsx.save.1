@@ -1,0 +1,239 @@
+cat > src/App.jsx << 'EOF'
+import { useState } from "react";
+
+export default function App() {
+  const [page, setPage] = useState("home");
+
+  return (
+    <div style={{ fontFamily: "Arial", padding: 20 }}>
+      <header style={{ borderBottom: "1px solid #ddd", marginBottom: 20 }}>
+        <h1>Estate-Connect</h1>
+        <p>Connecting landlords, tenants & agents worldwide</p>
+
+        <nav style={{ marginTop: 10 }}>
+          <button onClick={() => setPage("home")}>Home</button>{" "}
+          <button onClick={() => setPage("about")}>About</button>{" "}
+          <button onClick={() => setPage("features")}>Features</button>{" "}
+          <button onClick={() => setPage("contact")}>Contact</button>
+        </nav>
+      </header>
+
+      {page === "home" && (
+        <>
+          <h2>Find & List Property Easily</h2>
+          <p>
+            Estate-Connect is a smart real-estate platform where landlords,
+            tenants, and agents meet, chat, and locate properties using real-time maps.
+          </p>
+
+          <ul>
+            <li>🏠 Property listings</li>
+            <li>📍 Exact GPS house locations</li>
+            <li>💬 Direct landlord-tenant chat</li>
+            <li>🌍 World map integration</li>
+          </ul>
+        </>
+      )}
+
+      {page === "about" && (
+        <>
+          <h2>About the Developer</h2>
+          <p>
+            Hi, I’m the creator of Estate-Connect. I built this application to
+            simplify property rental and sales by connecting people directly
+            through technology.
+          </p>
+          <p>
+            This app is designed for emerging markets and global use, focusing
+            on transparency, accessibility, and ease of use.
+          </p>
+        </>
+      )}
+
+      {page === "features" && (
+        <>
+          <h2>Application Features</h2>
+          <ul>
+            <li>Multi-role system: Landlord, Tenant & Agent</li>
+            <li>Map-based property discovery</li>
+            <li>Secure communication</li>
+            <li>Mobile-first design</li>
+          </ul>
+        </>
+      )}
+
+      {page === "contact" && (
+        <>
+          <h2>Contact</h2>
+          <p>Email: your@email.com</p>
+          <p>Phone: +263 XXX XXX XXX</p>
+          <p>Country: Zimbabwe</p>
+        </>
+      )}
+
+      <footer style={{ marginTop: 40, borderTop: "1px solid #ddd", paddingTop: 10 }}>
+        <small>© {new Date().getFullYear()} Estate-Connect</small>
+      </footer>
+    </div>
+  );
+}
+EOF
+cat > src/App.jsx << 'EOF'
+import { useState } from "react";
+
+export default function App() {
+  const [page, setPage] = useState("home");
+
+  return (
+    <div style={{ fontFamily: "Arial", padding: 20 }}>
+      <header style={{ borderBottom: "1px solid #ddd", marginBottom: 20 }}>
+        <h1>Estate-Connect</h1>
+        <p>Connecting landlords, tenants & agents worldwide</p>
+
+        <nav style={{ marginTop: 10 }}>
+          <button onClick={() => setPage("home")}>Home</button>{" "}
+          <button onClick={() => setPage("about")}>About</button>{" "}
+          <button onClick={() => setPage("features")}>Features</button>{" "}
+          <button onClick={() => setPage("contact")}>Contact</button>
+        </nav>
+      </header>
+
+      {page === "home" && (
+        <>
+          <h2>Find & List Property Easily</h2>
+          <p>
+            Estate-Connect is a smart real-estate platform where landlords,
+            tenants, and agents meet, chat, and locate properties using real-time maps.
+          </p>
+
+          <ul>
+            <li>🏠 Property listings</li>
+            <li>📍 Exact GPS house locations</li>
+            <li>💬 Direct landlord-tenant chat</li>
+            <li>🌍 World map integration</li>
+          </ul>
+        </>
+      )}
+
+      {page === "about" && (
+        <>
+          <h2>About the Developer</h2>
+          <p>
+            Hi, I’m the creator of Estate-Connect. I built this application to
+            simplify property rental and sales by connecting people directly
+            through technology.
+          </p>
+          <p>
+            This app is designed for emerging markets and global use, focusing
+            on transparency, accessibility, and ease of use.
+          </p>
+        </>
+      )}
+
+      {page === "features" && (
+        <>
+          <h2>Application Features</h2>
+          <ul>
+            <li>Multi-role system: Landlord, Tenant & Agent</li>
+            <li>Map-based property discovery</li>
+            <li>Secure communication</li>
+            <li>Mobile-first design</li>
+          </ul>
+        </>
+      )}
+
+      {page === "contact" && (
+        <>
+          <h2>Contact</h2>
+          <p>Email: your@email.com</p>
+          <p>Phone: +263 XXX XXX XXX</p>
+          <p>Country: Zimbabwe</p>
+        </>
+      )}
+
+      <footer style={{ marginTop: 40, borderTop: "1px solid #ddd", paddingTop: 10 }}>
+        <small>© {new Date().getFullYear()} Estate-Connect</small>
+      </footer>
+    </div>
+  );
+}
+EOFcat > src/App.jsx << 'EOF'
+import { useState } from "react";
+
+export default function App() {
+  const [page, setPage] = useState("home");
+
+  return (
+    <div style={{ fontFamily: "Arial", padding: 20 }}>
+      <header style={{ borderBottom: "1px solid #ddd", marginBottom: 20 }}>
+        <h1>Estate-Connect</h1>
+        <p>Connecting landlords, tenants & agents worldwide</p>
+
+        <nav style={{ marginTop: 10 }}>
+          <button onClick={() => setPage("home")}>Home</button>{" "}
+          <button onClick={() => setPage("about")}>About</button>{" "}
+          <button onClick={() => setPage("features")}>Features</button>{" "}
+          <button onClick={() => setPage("contact")}>Contact</button>
+        </nav>
+      </header>
+
+      {page === "home" && (
+        <>
+          <h2>Find & List Property Easily</h2>
+          <p>
+            Estate-Connect is a smart real-estate platform where landlords,
+            tenants, and agents meet, chat, and locate properties using real-time maps.
+          </p>
+
+          <ul>
+            <li>🏠 Property listings</li>
+            <li>📍 Exact GPS house locations</li>
+            <li>💬 Direct landlord-tenant chat</li>
+            <li>🌍 World map integration</li>
+          </ul>
+        </>
+      )}
+
+      {page === "about" && (
+        <>
+          <h2>About the Developer</h2>
+          <p>
+            Hi, I’m the creator of Estate-Connect. I built this application to
+            simplify property rental and sales by connecting people directly
+            through technology.
+          </p>
+          <p>
+            This app is designed for emerging markets and global use, focusing
+            on transparency, accessibility, and ease of use.
+          </p>
+        </>
+      )}
+
+      {page === "features" && (
+        <>
+          <h2>Application Features</h2>
+          <ul>
+            <li>Multi-role system: Landlord, Tenant & Agent</li>
+            <li>Map-based property discovery</li>
+            <li>Secure communication</li>
+            <li>Mobile-first design</li>
+          </ul>
+        </>
+      )}
+
+      {page === "contact" && (
+        <>
+          <h2>Contact</h2>
+          <p>Email: your@email.com</p>
+          <p>Phone: +263 XXX XXX XXX</p>
+          <p>Country: Zimbabwe</p>
+        </>
+      )}
+
+      <footer style={{ marginTop: 40, borderTop: "1px solid #ddd", paddingTop: 10 }}>
+        <small>© {new Date().getFullYear()} Estate-Connect</small>
+      </footer>
+    </div>
+  );
+}
+EOF
