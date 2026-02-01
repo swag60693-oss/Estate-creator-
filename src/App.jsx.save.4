@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -10,29 +10,9 @@ export default function App() {
   const [input, setInput] = useState("");
 
   const properties = [
-    {
-      id: 1,
-      title: "2 Bedroom Apartment",
-      price: "$500/month",
-      location: "Harare",
-      lat: -17.8252,
-      lng: 31.0335,
-      videoUrl: "",
-      videoFile: null,
-    },
-    {
-      id: 2,
-      title: "Modern House",
-      price: "$900/month",
-      location: "Bulawayo",
-      lat: -20.15,
-      lng: 28.583,
-      videoUrl: "",
-      videoFile: null,
-    },
+    { id: 1, title: "2 Bedroom Apartment", price: "$500/month", location: "Harare" },
+    { id: 2, title: "Modern House", price: "$900/month", location: "Bulawayo" },
   ];
-
-  const mapRef = useRef(null);
 
   const sendMessage = () => {
     if (!input) return;
@@ -42,9 +22,10 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: "Arial", minHeight: "100vh", background: "#f3f4f6" }}>
+      
       {/* HEADER */}
       <div style={{ padding: 15, background: "#111827", color: "white" }}>
-        <h2>🚀 NEW Estate-Connect</h2>
+        <h2>🏠 Estate-Connect</h2>
         <small>Role: <b>{role}</b></small>
       </div>
 
@@ -59,6 +40,8 @@ export default function App() {
 
       {/* CONTENT */}
       <div style={{ padding: 15 }}>
+
+        {/* HOME */}
         {page === "home" && (
           <>
             <h3>Featured Properties</h3>
@@ -67,48 +50,107 @@ export default function App() {
                 <h4>{p.title}</h4>
                 <p>{p.price}</p>
                 <small>{p.location}</small>
-
-                {p.videoUrl && (
-                  <iframe
-                    src={p.videoUrl}
-                    width="100%"
-                    height="180"
-                    style={{ marginTop: 8, borderRadius: 8 }}
-                    allowFullScreen
-                  />
-                )}
-
-                {p.videoFile && (
-                  <video
-                    src={URL.createObjectURL(p.videoFile)}
-                    controls
-                    style={{ width: "100%", marginTop: 8, borderRadius: 8 }}
-                  />
-                )}
               </div>
             ))}
           </>
         )}
 
+        {/* MAP */}
         {page === "map" && (
           <>
-            <h3>World Map (Satellite)</h3>
-            <div style={{ height: 200, background: "#9ca3af", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <b>Satellite Map Ready</b>
+            <h3>World Ma{/* MAP */}
+{page === "map" && (
+  <>
+    <h3>World Map (Google Satellite)</h3>
+
+    <div
+      style={{
+        height: 300,
+        width: "100%",
+        borderRadius: 8,
+      }}
+      ref={(el) => {
+        if (!el || window.mapInitialized) return;
+        window.mapInitialized = true; // prevent multiple inits
+
+        const map = new window.google.maps.Map(el, {
+          center: { lat: -18.0, lng: 30.0 },
+          zoom: 6,
+          mapTypeId: "satellite",
+        });
+
+        // Add markers with popups
+        properties.forEach((p) => {
+          const marker = new window.google.maps.Marker({
+            position: { lat: p.lat, lng: p.lng },
+            map,
+            title: p.title,
+          });
+
+          const infoWindow = new window.google.maps.InfoWindow({
+            content: `<div>
+                        <b>${p.title}</b><br/>
+                        ${p.price}<br/>
+                        ${p.location}
+                      </div>`,
+          });
+
+          marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+          });
+        });
+      }}
+    />
+
+    <h4 style={{ marginTop: 15 }}>Property List</h4>
+    {properties.map((p) => (
+      <div
+        key={p.id}
+        style={{ background: "white", padding: 8, marginTop: 8 }}
+      >
+        {p.title} – {p.location}
+      </div>
+    ))}
+  </>
+)}p (Satellite Ready)</h3>
+            <div style={{
+              height: 200,
+              background: "#9ca3af",
+              borderRadius: 8,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
+              <b>Google Maps Satellite View (Coming Next)</b>
             </div>
+
+            <h4 style={{ marginTop: 15 }}>Property List</h4>
+            {properties.map(p => (
+              <div key={p.id} style={{ background: "white", padding: 8, marginTop: 8 }}>
+                {p.title} – {p.location}
+              </div>
+            ))}
           </>
         )}
 
+        {/* CHAT */}
         {page === "chat" && (
           <>
             <h3>Chat</h3>
-            <div style={{ background: "white", padding: 10, height: 200, overflowY: "auto", borderRadius: 8 }}>
+            <div style={{
+              background: "white",
+              padding: 10,
+              height: 200,
+              overflowY: "auto",
+              borderRadius: 8
+            }}>
               {messages.map((m, i) => (
                 <div key={i} style={{ textAlign: m.from === "You" ? "right" : "left" }}>
                   <p><b>{m.from}:</b> {m.text}</p>
                 </div>
               ))}
             </div>
+
             <div style={{ display: "flex", marginTop: 10 }}>
               <input
                 value={input}
@@ -121,27 +163,18 @@ export default function App() {
           </>
         )}
 
+        {/* POST */}
         {page === "post" && (
           <>
-            <h3>Post Property</h3>
+            <h3>Post / Promote Property</h3>
             <input placeholder="Title" style={{ width: "100%", marginBottom: 8 }} />
             <input placeholder="Price" style={{ width: "100%", marginBottom: 8 }} />
             <textarea placeholder="Description" style={{ width: "100%", marginBottom: 8 }} />
-
-            <label>
-              Video URL:
-              <input type="text" style={{ width: "100%" }} />
-            </label>
-
-            <label>
-              Upload Video:
-              <input type="file" accept="video/*" />
-            </label>
-
             <button>Publish</button>
           </>
         )}
 
+        {/* PROFILE */}
         {page === "profile" && (
           <>
             <h3>Profile</h3>
@@ -149,15 +182,25 @@ export default function App() {
             <p><b>Email:</b> swag60693@gmail.com</p>
             <p><b>Phone:</b> 0773759613</p>
 
+            <h4>Change Role</h4>
             <select value={role} onChange={e => setRole(e.target.value)}>
               <option>Tenant</option>
               <option>Landlord</option>
               <option>Agent</option>
               <option>Company</option>
             </select>
+
+            <h4 style={{ marginTop: 20 }}>About Estate-Connect</h4>
+            <p>
+              Estate-Connect is a global real estate platform connecting tenants,
+              landlords, agents, and companies through maps, chat, and smart promotion.
+            </p>
           </>
         )}
+
       </div>
     </div>
   );
 }
+
+
