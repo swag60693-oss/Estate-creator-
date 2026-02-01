@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://estate-connect-zeta.vercel.app/sitemap.xml
