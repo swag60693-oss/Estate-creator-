@@ -1,18 +1,12 @@
 #!/bin/bash
 
-# Navigate to project folder
-cd ~/estate-connect || exit
+echo "📦 Installing dependencies..."
+npm install
 
-# Add changes to git
-git add .
+echo "🏗️ Building app..."
+npm run build
 
-# Commit with message
-git commit -m "Auto deploy $(date +'%Y-%m-%d %H:%M:%S')"
+echo "🚀 Deploying to Vercel..."
+vercel --prod --yes
 
-# Push to GitHub
-git push origin main
-
-# Deploy to Vercel (NkSkjRXc3eUHIMUCHaH8HgfO )
-vercel --prod --toke
-NkSkjRXc3eUHIMUCHaH8HgfO
-n YOUR_TOKEN
+echo "✅ Deployment finished at $(date)"

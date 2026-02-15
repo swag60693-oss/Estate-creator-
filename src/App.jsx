@@ -1,163 +1,21 @@
-import { useState, useRef } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import MapPage from "./pages/MapPage";
+import Chat from "./pages/Chat";
 
 export default function App() {
-  const [page, setPage] = useState("home");
-  const [role, setRole] = useState("Tenant");
-  const [messages, setMessages] = useState([
-    { from: "Agent", text: "Hello, the house is available." },
-    { from: "You", text: "Great! Can I visit tomorrow?" },
-  ]);
-  const [input, setInput] = useState("");
-
-  const properties = [
-    {
-      id: 1,
-      title: "2 Bedroom Apartment",
-      price: "$500/month",
-      location: "Harare",
-      lat: -17.8252,
-      lng: 31.0335,
-      videoUrl: "",
-      videoFile: null,
-    },
-    {
-      id: 2,
-      title: "Modern House",
-      price: "$900/month",
-      location: "Bulawayo",
-      lat: -20.15,
-      lng: 28.583,
-      videoUrl: "",
-      videoFile: null,
-    },
-  ];
-
-  const mapRef = useRef(null);
-
-  const sendMessage = () => {
-    if (!input) return;
-    setMessages([...messages, { from: "You", text: input }]);
-    setInput("");
-  };
-
   return (
-    <div style={{ fontFamily: "Arial", minHeight: "100vh", background: "#f3f4f6" }}>
-      {/* HEADER */}
-      <div style={{ padding: 15, background: "#111827", color: "white" }}>
-        <h2>🚀 NEW Estate-Connect</h2>
-        <small>Role: <b>{role}</b></small>
-      </div>
-
-      {/* NAV */}
-      <div style={{ display: "flex", justifyContent: "space-around", padding: 10, background: "#e5e7eb" }}>
-        <button onClick={() => setPage("home")}>Home</button>
-        <button onClick={() => setPage("map")}>Map</button>
-        <button onClick={() => setPage("chat")}>Chat</button>
-        <button onClick={() => setPage("post")}>Post</button>
-        <button onClick={() => setPage("profile")}>Profile</button>
-      </div>
-
-      {/* CONTENT */}
-      <div style={{ padding: 15 }}>
-        {page === "home" && (
-          <>
-            <h3>Featured Properties</h3>
-            {properties.map(p => (
-              <div key={p.id} style={{ background: "white", padding: 10, marginBottom: 10, borderRadius: 8 }}>
-                <h4>{p.title}</h4>
-                <p>{p.price}</p>
-                <small>{p.location}</small>
-
-                {p.videoUrl && (
-                  <iframe
-                    src={p.videoUrl}
-                    width="100%"
-                    height="180"
-                    style={{ marginTop: 8, borderRadius: 8 }}
-                    allowFullScreen
-                  />
-                )}
-
-                {p.videoFile && (
-                  <video
-                    src={URL.createObjectURL(p.videoFile)}
-                    controls
-                    style={{ width: "100%", marginTop: 8, borderRadius: 8 }}
-                  />
-                )}
-              </div>
-            ))}
-          </>
-        )}
-
-        {page === "map" && (
-          <>
-            <h3>World Map (Satellite)</h3>
-            <div style={{ height: 200, background: "#9ca3af", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <b>Satellite Map Ready</b>
-            </div>
-          </>
-        )}
-
-        {page === "chat" && (
-          <>
-            <h3>Chat</h3>
-            <div style={{ background: "white", padding: 10, height: 200, overflowY: "auto", borderRadius: 8 }}>
-              {messages.map((m, i) => (
-                <div key={i} style={{ textAlign: m.from === "You" ? "right" : "left" }}>
-                  <p><b>{m.from}:</b> {m.text}</p>
-                </div>
-              ))}
-            </div>
-            <div style={{ display: "flex", marginTop: 10 }}>
-              <input
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                placeholder="Type a message"
-                style={{ flex: 1, padding: 8 }}
-              />
-              <button onClick={sendMessage}>Send</button>
-            </div>
-          </>
-        )}
-
-        {page === "post" && (
-          <>
-            <h3>Post Property</h3>
-            <input placeholder="Title" style={{ width: "100%", marginBottom: 8 }} />
-            <input placeholder="Price" style={{ width: "100%", marginBottom: 8 }} />
-            <textarea placeholder="Description" style={{ width: "100%", marginBottom: 8 }} />
-
-            <label>
-              Video URL:
-              <input type="text" style={{ width: "100%" }} />
-            </label>
-
-            <label>
-              Upload Video:
-              <input type="file" accept="video/*" />
-            </label>
-
-            <button>Publish</button>
-          </>
-        )}
-
-        {page === "profile" && (
-          <>
-            <h3>Profile</h3>
-            <p><b>Name:</b> Pashall KAMANGA</p>
-            <p><b>Email:</b> swag60693@gmail.com</p>
-            <p><b>Phone:</b> 0773759613</p>
-
-            <select value={role} onChange={e => setRole(e.target.value)}>
-              <option>Tenant</option>
-              <option>Landlord</option>
-              <option>Agent</option>
-              <option>Company</option>
-            </select>
-          </>
-        )}
-      </div>
-    </div>
+    <BrowserRouter>
+      <nav style={{ padding:10, background:"#eee" }}>
+        <Link to="/" style={{margin:5}}>Home</Link>
+        <Link to="/map" style={{margin:5}}>Map</Link>
+        <Link to="/chat" style={{margin:5}}>Chat</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/map" element={<MapPage/>}/>
+        <Route path="/chat" element={<Chat/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }

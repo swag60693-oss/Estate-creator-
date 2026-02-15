@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">estate-connect</string>
+    <string name="title_activity_main">estate-connect</string>
+    <string name="package_name">com.yourdomain.estateconnect</string>
+    <string name="custom_url_scheme">com.yourdomain.estateconnect</string>
+</resources>
