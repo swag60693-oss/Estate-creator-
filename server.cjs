@@ -1,12 +1,12 @@
-const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
-const cors = require("cors");
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
+import cors from "cors";
 
 const app = express();
 
 app.use(cors({
-  origin: "*", // allow all for now (we lock later)
+  origin: "*",
 }));
 
 const server = http.createServer(app);
@@ -22,7 +22,6 @@ let messages = [];
 io.on("connection", (socket) => {
   console.log("User connected");
 
-  // Send old messages
   socket.emit("load_messages", messages);
 
   socket.on("send_message", (data) => {
@@ -35,7 +34,6 @@ io.on("connection", (socket) => {
   });
 });
 
-// simple test route
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
